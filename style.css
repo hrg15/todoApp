@@ -1,0 +1,185 @@
+@font-face{
+    font-family: estedad;
+    src: url(./fonts/Estedad-Medium.ttf);
+    font-weight: normal;
+}
+@font-face{
+    font-family: estedad;
+    src: url(./fonts/Estedad-Bold.ttf);
+    font-weight: bold;
+}
+body{
+    background: #212121;
+    max-height: 100vh;
+    direction: rtl;
+    font-family: estedad !important;
+
+}
+
+h1{
+    color: #fff;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.todolist{
+    position: absolute;
+    right: 50%;
+    transform: translate(50%);
+    display: inline-block;
+    text-align: center;
+    transition: all .5s;
+}
+form{
+    margin-top: 50px;
+    display: flex;
+    border: 2px solid #17e68c;
+    border-radius: 30px;
+    padding: 2px;
+}
+
+input,button{
+    border: none;
+    outline: none;
+}
+.addBtn{
+    order: 1;
+    background: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all .3s;
+}
+.addBtn:hover{
+    background: #17e68c;
+
+}
+.addInput{
+    order: 2;
+    background:none !important;
+    color: white;
+    font-family: estedad;
+    font-size: 20px;
+}
+#addinput1{
+    background-color: transparent !important;
+    background:transparent !important;
+    background-color: transparent !important;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+#valid{
+    color: tomato;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+/* --side bar--*/
+
+.done{
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: #000;
+    border-left: 2px solid  #17e68c;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+.done h2{
+    color: white;
+    text-align: center;
+}
+#navBtn{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 45px;
+    background: #17e69c;
+    color: white;
+    cursor: pointer;
+    height: 70px;
+    font-size: 20px;
+    border-bottom-left-radius: 70px;
+    border-top-left-radius: 70px;
+    transition: all 0.5s ease;
+    transform: translateY(-50%);
+}
+#navBtn i{
+    transition: all 0.2s;
+}
+#navBtn:hover i{
+    margin-right: 5px;
+}
+
+#navBtn2{
+    position: absolute;
+    top: 50%;
+    right: -100px;
+    width: 45px;
+    background: #17e69c;
+    color: white;
+    cursor: pointer;
+    height: 70px;
+    font-size: 20px;
+    z-index: 22;
+    transform: translateY(-50%);
+    border-bottom-right-radius: 70px;
+    border-top-right-radius: 70px;
+    transition: all 0.5s ease;
+}
+#navBtn2 i{
+    transition: all 0.2s;
+}
+#navBtn2:hover i{
+    margin-left: 5px;
+}
+
+/* li todo style */
+
+.todoUl{
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+.todoDiv{
+    background: #000;
+    color: #fff;
+    margin: 10px;
+    display: flex;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0,0.2);
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    transition: all 0.2s;
+}
+.todoDiv:hover{
+    padding: 15px 13px;
+}
+.todoItem{
+    flex: 1;
+}
+.todoDiv button{
+    border: none;
+    outline: none;
+    padding: 5px;
+    margin: 2px;
+    background: none;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.2s;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.complited:hover{
+    background: #17e69c;
+}
+.trashBtn:hover{
+    background:#f44336;
+}

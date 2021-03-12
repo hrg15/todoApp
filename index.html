@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./fonts/all.min.css">
+    <title>todo list</title>
+</head>
+<body>
+
+    <div class="todolist" id="todolist">
+        <h1>لیست انجام کارهای من</h1>
+        <form>
+            <input type="text" id="addinput1" class="addInput" placeholder="اضافه کردن" required>
+
+            <button class="addBtn" type="submit" onclick="addTodo(event)">
+                <i class="fa fa-plus"></i>
+            </button>
+        </form>
+        <ul class="todoUl">
+            
+        </ul>
+
+    </div>
+
+
+
+
+
+    <button id="navBtn" onclick="navbarOpen()"><i class="fa fa-angle-double-left"></i></button>
+    <button id="navBtn2" onclick="navbarClose()"><i class="fa fa-angle-double-right"></i></button>
+  
+    <div class="done" id="nav">
+        <h2>مرور لیست</h2>
+
+    </div>
+
+
+
+    <script src="./app.js"></script>
+</body>
+</html>
