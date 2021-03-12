@@ -19,17 +19,23 @@ function navbarClose(){
     closeBtn.style.right = "-100px";
  }
 
- // todo list
+ //!     todo list
 
  //? defined elements
-
- var todoUl = document.querySelector(".todoUl");
- 
+document.addEventListener('DOMContentLoaded',getTodo);
+ var todoUl = document.querySelectorAll(".todoUl");
+ var todoDash = document.querySelector(".todoDash");
+ var valid = document.getElementById("valid");
  //? functions
  
  
  function addTodo(event){
    event.preventDefault();
+   if(addInput.value == ''){
+      valid.innerHTML="یک مورد اضافه کنید";
+      return;
+   }
+   valid.innerHTML="";
    //create div
    const todoDiv = document.createElement("div");
    todoDiv.classList.add("todoDiv");
@@ -38,7 +44,9 @@ function navbarClose(){
    liTodo.classList.add("todoItem");
    liTodo.innerText= addInput.value;
    todoDiv.appendChild(liTodo);
-   //create button 
+   //add local save
+   localSave(addInput.value);
+   // complited button 
    const complitedbtn = document.createElement("button");
    complitedbtn.classList.add("complited");
    complitedbtn.innerHTML='<i class="fa fa-check"></i>'
@@ -49,6 +57,94 @@ function navbarClose(){
    trshBtn.innerHTML='<i class="fa fa-trash"></i>'
    todoDiv.appendChild(trshBtn);
    //append div to ul
-   todoUl.appendChild(todoDiv);
+   //todoUl.appendChild(todoDiv);
+   for(let i = 0 ; i < todoUl.length; i++){
+      todoUl[i].appendChild(todoDiv.cloneNode(true));
+   }
    addInput.value="";
+}
+
+//? btn refrences
+
+for(var i = 0 ; i < todoUl.length; i++){
+   
+   todoUl[i].addEventListener('click' , deleteCheck);
+}
+
+
+
+function deleteCheck(e){
+   const item = e.target;
+
+   if(item.classList[0] === "trashBtn"){
+      const parentItem = item.parentElement;
+      parentItem.classList.add("goOut");
+      removeLocal(parentItem);
+      parentItem.remove();
+   }
+
+
+   if(item.classList[0] === "complited"){
+      const parent = item.parentElement;
+      parent.classList.toggle("complited-btn");
+   }
+}
+
+function localSave(todo){
+   let todos;
+   if (localStorage.getItem("todos") === null) {
+      todos = [];
+   }else{
+      todos= JSON.parse(localStorage.getItem("todos"));
+   }
+    
+   todos.push(todo);
+   localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function getTodo(){
+    let todos;
+
+   if (localStorage.getItem("todos") === null) {
+      todos = [];
+   }else{
+      todos= JSON.parse(localStorage.getItem("todos"));
+   }
+   todos.forEach(function(todo){
+
+      const todoDiv = document.createElement("div");
+      todoDiv.classList.add("todoDiv");
+      //create li
+      const liTodo = document.createElement("li");
+      liTodo.classList.add("todoItem");
+      liTodo.innerText= todo;
+      todoDiv.appendChild(liTodo);
+      // complited button 
+      const complitedbtn = document.createElement("button");
+      complitedbtn.classList.add("complited");
+      complitedbtn.innerHTML='<i class="fa fa-check"></i>'
+      todoDiv.appendChild(complitedbtn);
+      // trash button 
+      const trshBtn = document.createElement("button");
+      trshBtn.classList.add("trashBtn");
+      trshBtn.innerHTML='<i class="fa fa-trash"></i>'
+      todoDiv.appendChild(trshBtn);
+      //append div to ul
+      for(let i = 0 ; i < todoUl.length; i++){
+         todoUl[i].appendChild(todoDiv.cloneNode(true));
+      }
+
+   });
+}
+function removeLocal(todo){
+   let todos;
+
+   if (localStorage.getItem("todos") === null) {
+      todos = [];
+   }else{
+      todos= JSON.parse(localStorage.getItem("todos"));
+   }
+   const todoIndex = todo.children[0].innerText;
+   todos.splice(todos.indexOf(todoIndex), 1);
+   localStorage.setItem("todos", JSON.stringify(todos));
 }

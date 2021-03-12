@@ -72,9 +72,10 @@ input,button{
     border-top-left-radius: 30px;
 }
 #valid{
-    color: tomato;
+    color: #19b987;
     font-size: 18px;
-    transition: all 0.2s;
+    transition: all 0.3s ease-in;
+    text-align: center;
 }
 
 /* --side bar--*/
@@ -183,3 +184,52 @@ input,button{
 .trashBtn:hover{
     background:#f44336;
 }
+.fa-trash, .fa-check{
+    pointer-events: none;
+}
+.complited-btn{
+    transition: all 0.3s ;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+.goOut{
+
+
+}
+ /*   done ul*/
+ .doneUl{
+     position: relative;
+    z-index: 22;
+    color: whitesmoke;
+    list-style: none;
+    display: flex;
+    width: 75%;
+    padding: 0;
+    justify-content: space-between;
+    margin: 40px auto 0;
+ }
+ .doneUl::before{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    border-bottom: 2px solid #17e68c;
+    width: 100%;
+    opacity: 0.5;
+
+ }
+ .doneUl li a{
+     color: whitesmoke;
+     text-decoration: none;
+ }
+ .doneUl li ul{
+     position: absolute;
+     padding: 0;
+     top: 40px;
+     right: 5px;
+     list-style: none;
+     width: 100%;
+ }
+ .doneUl li ul .todoDiv{
+     background: #212121;
+ }
