@@ -12,41 +12,21 @@
     <div class="todolist" id="todolist">
         <h1>لیست انجام کارهای من</h1>
         <form>
-            <input type="text" id="addinput1" class="addInput" placeholder="اضافه کردن" autocomplete="off" required>
 
-            <button class="addBtn" type="submit" onclick="addTodo(event)">
-                <i class="fa fa-plus"></i>
-            </button>
+            <input type="text" id="addinput1" class="addInput" placeholder="اضافه کردن" autocomplete="off" required>
+            <button class="addBtn" type="submit" onclick="addTodo(event)"> <i class="fa fa-plus"></i> </button>
+
         </form>
         <p id="valid"></p>
+        <ul class="category">
+            <li><button id="alltodo" class="active" value="alltodo">همه</button></li>
+            <li><button id="uncompleted" class="b " value="uncompleted">ناتمام</button></li>
+            <li><button id="completed" class="b " value="completed">تمام شده</button></li>
+        </ul>
         <ul class="todoUl">
             
         </ul>
-
     </div>
-
-
-
-
-
-    <button id="navBtn" onclick="navbarOpen()"><i class="fa fa-angle-double-left"></i></button>
-    <button id="navBtn2" onclick="navbarClose()"><i class="fa fa-angle-double-right"></i></button>
-  
-    <div class="done" id="nav">
-        <h2>مرور لیست</h2>
-        <ul class="doneUl">
-            <li><a href="#">همه</a>
-            <ul class="todoUl">
-                
-            </ul>
-            </li>
-            <li><a href="#">برای انجام</a> </li>
-            <li><a href="#">تکمیل شده</a> </li>
-
-        </ul>
-    </div>
-
-
 
     <script src="./app.js"></script>
 </body>

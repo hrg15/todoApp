@@ -1,38 +1,15 @@
-//form validation
-var addInput = document.getElementById("addinput1")
-addInput.setCustomValidity("یک مورد اضافه کنید")
-
-// toggle nav
-
-var closeBtn = document.getElementById("navBtn2");
-var main = document.getElementById("todolist");
-var nav = document.getElementById("nav");
-
-function navbarOpen(){
-     nav.style.width = "400px"; 
-    main.style.marginRight = "200px";
-    closeBtn.style.right = "355px";
- }
-function navbarClose(){
-     nav.style.width = "0"; 
-    main.style.marginRight = "0";
-    closeBtn.style.right = "-100px";
- }
-
- //!     todo list
-
  //? defined elements
 document.addEventListener('DOMContentLoaded',getTodo);
- var todoUl = document.querySelectorAll(".todoUl");
+ var todoUl = document.querySelector(".todoUl");
  var todoDash = document.querySelector(".todoDash");
  var valid = document.getElementById("valid");
+ var addInput = document.getElementById("addinput1")
+
  //? functions
- 
- 
  function addTodo(event){
    event.preventDefault();
    if(addInput.value == ''){
-      valid.innerHTML="یک مورد اضافه کنید";
+      valid.innerHTML="یک مورداضافه کنید";
       return;
    }
    valid.innerHTML="";
@@ -57,39 +34,35 @@ document.addEventListener('DOMContentLoaded',getTodo);
    trshBtn.innerHTML='<i class="fa fa-trash"></i>'
    todoDiv.appendChild(trshBtn);
    //append div to ul
-   //todoUl.appendChild(todoDiv);
-   for(let i = 0 ; i < todoUl.length; i++){
-      todoUl[i].appendChild(todoDiv.cloneNode(true));
-   }
+   todoUl.appendChild(todoDiv);
    addInput.value="";
 }
 
 //? btn refrences
-
-for(var i = 0 ; i < todoUl.length; i++){
-   
-   todoUl[i].addEventListener('click' , deleteCheck);
-}
-
-
+todoUl.addEventListener('click' , deleteCheck);
+//delete function
+function deleteFun(item) { 
+   const parentItem = item.parentElement;
+   parentItem.classList.add("goOut");
+   removeLocal(parentItem);
+   parentItem.remove();
+ }
 
 function deleteCheck(e){
    const item = e.target;
 
+   //remove check
    if(item.classList[0] === "trashBtn"){
-      const parentItem = item.parentElement;
-      parentItem.classList.add("goOut");
-      removeLocal(parentItem);
-      parentItem.remove();
+      deleteFun(item);
    }
-
-
+   // completed check
    if(item.classList[0] === "complited"){
-      const parent = item.parentElement;
+      const parent = item.parentElement;   
       parent.classList.toggle("complited-btn");
    }
 }
 
+//! local save
 function localSave(todo){
    let todos;
    if (localStorage.getItem("todos") === null) {
@@ -102,6 +75,7 @@ function localSave(todo){
    localStorage.setItem("todos", JSON.stringify(todos));
 }
 
+//! restore data
 function getTodo(){
     let todos;
 
@@ -130,12 +104,11 @@ function getTodo(){
       trshBtn.innerHTML='<i class="fa fa-trash"></i>'
       todoDiv.appendChild(trshBtn);
       //append div to ul
-      for(let i = 0 ; i < todoUl.length; i++){
-         todoUl[i].appendChild(todoDiv.cloneNode(true));
-      }
-
+      todoUl.appendChild(todoDiv);
    });
 }
+
+//! remove localstorage
 function removeLocal(todo){
    let todos;
 
@@ -148,3 +121,71 @@ function removeLocal(todo){
    todos.splice(todos.indexOf(todoIndex), 1);
    localStorage.setItem("todos", JSON.stringify(todos));
 }
+
+//! shos buttons
+var cat = document.querySelector(".category");
+const allTodo = document.getElementById("alltodo");
+const finish = document.getElementById("completed");
+const unfinish = document.getElementById("uncompleted");
+
+cat.addEventListener('click',filters);
+
+function filters(e){
+   let todos = todoUl.childNodes;
+   let target = e.target.value;
+   e.preventDefault();
+   todos.forEach(function (todo) { 
+      switch(target){
+
+         case "alltodo":
+            if(todo.tagName == "DIV"){
+ 
+               todo.style.display= "flex";
+            }
+            unfinish.classList.remove("active");
+            finish.classList.remove("active");
+            allTodo.classList.add("active");
+         break;
+
+         case "uncompleted":
+            if(todo.tagName == "DIV"){
+               if(!todo.classList.contains("complited-btn")){
+                  todo.style.display = "flex";
+               }else{
+                  todo.style.display = "none";
+               }
+            }
+            allTodo.classList.remove("active");
+            finish.classList.remove("active");
+            unfinish.classList.add("active");
+         break;
+
+         case "completed":
+            if(todo.tagName == "DIV"){
+               if(todo.classList.contains("complited-btn")){
+                  todo.style.display = "flex";
+               }else{
+                  todo.style.display = "none";
+               }
+            }
+            allTodo.classList.remove("active");
+            unfinish.classList.remove("active");
+            finish.classList.add("active");
+         break; 
+      }
+    })
+}
+
+//! auto delete completed things
+setTimeout(aoutoDel,3600000*24*7);
+function aoutoDel() { 
+   let todos = todoUl.childNodes;
+   todos.forEach(function (todo) {
+      if (todo.tagName == "DIV") {
+         if (todo.classList.contains("complited-btn")) {
+            removeLocal(todo);
+            todo.remove();
+         }
+      }
+   })
+ }

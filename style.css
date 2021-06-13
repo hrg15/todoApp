@@ -29,13 +29,18 @@ h1{
     display: inline-block;
     text-align: center;
     transition: all .5s;
+    width: 500px;
+    padding: 0 10px;
+    margin: 0 10px;
 }
-form{
-    margin-top: 50px;
+.todolist form{
+    margin: 50px auto 0 auto;
     display: flex;
     border: 2px solid #17e68c;
     border-radius: 30px;
     padding: 2px;
+    flex-wrap: wrap;
+    width: 65%;
 }
 
 input,button{
@@ -145,7 +150,8 @@ input,button{
 .todoUl{
     list-style: none;
     padding: 0;
-    margin-top: 30px;
+    margin: 30px auto 0 auto ;
+    width: 85%;
 }
 .todoDiv{
     background: #000;
@@ -193,8 +199,6 @@ input,button{
     text-decoration: line-through;
 }
 .goOut{
-
-
 }
  /*   done ul*/
  .doneUl{
@@ -233,3 +237,48 @@ input,button{
  .doneUl li ul .todoDiv{
      background: #212121;
  }
+ /* category btn */
+ .category{
+     margin-top: 10px;
+     list-style: none;
+     display: flex;
+     justify-content: space-around;
+     flex-wrap: wrap;
+    padding: 0;margin: 0;
+    position: relative;
+    width: 50%;
+    margin: auto;
+
+ }
+.category button{
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color: #fff;
+    font-family: estedad;
+    cursor: pointer;
+    position: relative;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+.category .active::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: #17e68c;
+    transition: all 0.2s;
+
+}
+
+/*!  responsive sectin  */
+@media only screen and (max-width: 570px) {
+    .todolist{
+        position: inherit;
+        transform: translate(0);
+
+    }
+  }
